@@ -1,0 +1,48 @@
+# order of operations
+
+-- 1. create the user id mapping table (fullvisitorid) (we skip this for the moment and try and re-use the Snowplow one...)
+
+-- 2. create conversionsbycustomerid table (conversions_by_customer_id). exact match.
+
+-- 3. create sessionsbycustomerid table (sessions_by_customer_id). close match, tested.
+
+-- 5. create paths_to_conversion_table (?) (paths_to_conversion). tested and correct number of rows. correct logic.
+
+-- 6. create paths to non-conversion table (paths_to_non_conversion). testing: number of rows is corect.
+
+-- 7. create path summary table (path_summary.sql). minimal adaptation. number of rows is correct.
+
+-- 8. create channel counts table (channel_counts.sql). counts are exact, tested.
+
+-- 9. now do something with python (run_fractribution)
+run the Snowplow version of fractribution which should mutate path_summary table and create a report table somewhere as well.
+consider moving the extra path_summary columns to dbt rather than the fractribution script.
+
+`python3 main_snowplow.py --project_id=snowflake-snowplow-217500 --dataset=fractribution_snowplow --ga_sessions_table=bigquery-public-data.google_analytics_sample.ga_sessions_* --conversion_window_end_date=2017-08-01 --conversion_window_length=30 --path_lookback_days=30 --path_transform=exposure --attribution_model=shapley`
+
+-- what data does run fractribution depend on?
+    -- path_summary
+    -- 
+
+-- 10. at the end of this process report_table is written I think?
+-- report_table_YYYY-MM-DD
+
+TODO: see if spend and roas can be added?
+
+
+-- NEW run
+-- conversionsby (mock this out?)
+-- sessionsby (mock this out?)
+-- udfs
+-- paths_to_conversion (test: same number of rows)
+-- paths_to_non_conversion (test: TODO)
+-- path_summary (?) (test: ), path summary is now an intermediate table, before any transforms / logic has been applied
+-- channel_counts (test: the counts here look good)
+
+then python script?
+-- extract channel counts
+-- create empty path summary
+-- load into path summary
+-- load into report table
+-- load into (?) channel spend table
+-- update report table with channel spend information

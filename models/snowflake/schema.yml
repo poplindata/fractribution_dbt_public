@@ -1,0 +1,91 @@
+
+version: 2
+
+sources:
+  - name: atomic
+    tables:
+      - name: fractribution_sample
+        description: Sample events table (Snowplow data but with fewer columns)
+
+models:
+  - name: s_channel_counts
+    description: TBA
+    columns:
+      - name: channel
+        description: Channel name
+      - name: campaign
+        description: Campaign name
+      - name: source
+        description: Source / referring host
+      - name: medium
+        description: Marketing medium
+      - name: number_of_events
+        description: Count of events per channel / campaign / source / medium
+
+  - name: s_conversions_by_customer_id
+    description: TBA
+    columns:
+      - name: customerId
+        description: Identifier for the customer, 'f' prefixed for, 'u' prefixed for logged in?
+      - name: conversionTimestamp
+        description: UTC timestamp for the conversion
+      - name: revenue
+        description: Revenue (dollars / cents) for the conversion
+      
+
+  - name: s_path_summary
+    description: TBA
+    columns:
+      - name: transformedPath
+        description: "> delimited path summary"
+      - name: conversions
+        description: Count of conversions for this path
+      - name: nonConversions
+        description: Count of non-conversions for path
+      - name: revenue
+        description: Revenue for the given path
+      - name: direct_display_other_organic_search_paid_search_referral
+        description: These columns may be created dynamically... 
+
+  - name: s_paths_to_conversion
+    description: TBA
+    columns:
+      - name: customerId
+        description: Id for the customer (identified or cookie)
+      - name: conversionTimestamp
+        description: UTC timestamp for the conversion event
+      - name: revenue
+        description: Revenue associated with the conversion
+      - name: path
+        description: Path to conversion (> delimited)
+      - name: transformedPath
+        description: Transformations applied to "path" above
+
+  - name: s_paths_to_non_conversion
+    description: TBA
+    columns:
+      - name: customerId
+        description: Id for the customer (identified or cookie)
+      - name: path
+        description: Path to conversion (> delimited)
+      - name: transformedPath
+        description: Transformations applied to "path" above
+
+  - name: s_sessions_by_customer_id
+    description: TBA
+    columns:
+      - name: customerId
+        description: Customer id
+      - name: visitStartTimestamp
+        description: UTC timestamp for the start of the session
+      - name: channel
+        description: Channel
+      - name: referralPath
+        description: Referall path for the session
+      - name: campaign
+        description: Marketing campaign
+      - name: source
+        description: Marketing source
+      - name: medium
+        description: Marketing medium
+      
