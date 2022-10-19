@@ -34,13 +34,12 @@ vars:
 
   use_snowplow_web_user_mapping_table: false # true if using the Snowplow base model for web user mappings (domain_userid => user_id)
 
-# Source variable examples:
+# Source variables examples:
   # snowflake__atomic_schema: 'atomic'
   # snowflake__events_table: 'events'
-  # snowflake__page_views_schema: 'derived'
-  # snowflake__page_views_table: 'page_views'
+  # snowflake__page_views_schema: 'atomic_derived'
+  # snowflake__page_views_table: 'snowplow_web_page_views'
   
-
   
   # snowplow_web_user_mapping_table: fractribution_snowplow_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
 

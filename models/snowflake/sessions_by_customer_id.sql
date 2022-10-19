@@ -1,4 +1,3 @@
--- TODO: do we consider any time a channel changes or just the channel at the start of a session?
 SELECT
     CASE
         WHEN page_views.user_id IS NOT NULL AND page_views.user_id != '' THEN 'u' || page_views.user_id -- use event user_id
