@@ -6,3 +6,8 @@ sources:
     tables:
       - name: events
         identifier: "{{ var('snowplow__events_table', 'events') }}"
+  - name: derived
+    schema: "{{ var('snowplow__page_views_schema', 'derived') }}"
+    tables:
+      - name: snowplow_web_page_views
+        identifier: "{{ var('snowplow__page_views_table', 'snowplow_web_page_views') }}"
