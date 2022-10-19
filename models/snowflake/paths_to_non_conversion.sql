@@ -28,7 +28,7 @@ SELECT
     {% endfor %}
     , ' > ') AS transformedPath
 FROM NonConversions
-LEFT JOIN {{ ref('s_sessions_by_customer_id') }} sessions_by_customer_id
+LEFT JOIN {{ ref('sessions_by_customer_id') }} sessions_by_customer_id
   ON
     NonConversions.customerId = sessions_by_customer_id.customerId
     AND DATEDIFF(day, visitStartTimestamp, nonConversionTimestamp)

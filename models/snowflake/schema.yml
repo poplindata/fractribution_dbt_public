@@ -3,12 +3,18 @@ version: 2
 
 sources:
   - name: atomic
+    schema: "{{ var('snowflake__atomic_schema', 'atomic') }}"
     tables:
-      - name: fractribution_sample
-        description: Sample events table (Snowplow data but with fewer columns)
-
+      - name: events
+        identifier: "{{ var('snowflake__events_table', 'events') }}"
+  - name: derived
+    schema: "{{ var('snowflake__page_views_schema', 'derived') }}"
+    tables:
+      - name: snowplow_web_page_views
+        identifier: "{{ var('snowflake__page_views_table', 'snowplow_web_page_views') }}"
+        
 models:
-  - name: s_channel_counts
+  - name: channel_counts
     description: TBA
     columns:
       - name: channel
@@ -22,7 +28,7 @@ models:
       - name: number_of_events
         description: Count of events per channel / campaign / source / medium
 
-  - name: s_conversions_by_customer_id
+  - name: conversions_by_customer_id
     description: TBA
     columns:
       - name: customerId
@@ -33,7 +39,7 @@ models:
         description: Revenue (dollars / cents) for the conversion
       
 
-  - name: s_path_summary
+  - name: path_summary
     description: TBA
     columns:
       - name: transformedPath
@@ -71,7 +77,7 @@ models:
       - name: transformedPath
         description: Transformations applied to "path" above
 
-  - name: s_sessions_by_customer_id
+  - name: sessions_by_customer_id
     description: TBA
     columns:
       - name: customerId

@@ -12,7 +12,7 @@
 -- found in channel_counts
 
 WITH channels AS (
-    SELECT ARRAY_AGG(DISTINCT channel) AS c FROM {{ ref('s_channel_counts') }}
+    SELECT ARRAY_AGG(DISTINCT channel) AS c FROM {{ ref('channel_counts') }}
 )
 SELECT
 CAST(channel.value AS STRING) AS channel,

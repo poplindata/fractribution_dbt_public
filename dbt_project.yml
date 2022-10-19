@@ -24,8 +24,8 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 vars:
-  conversion_window_start_date: '2022-07-03' # conversion window start date
-  conversion_window_end_date: '2022-08-01' # conversion window end date
+  conversion_window_start_date: '2017-07-03' # conversion window start date
+  conversion_window_end_date: '2017-08-01' # conversion window end date
   conversion_hosts: ['poplindata.com'] # url_hosts to consider
   path_lookback_steps: 0 # Limit for the number of marketing channels to look at before the conversion (0 = unlimited)
   path_lookback_days: 30 # Restrict to marketing channels within this many days of the conversion (recommended: 30 / 14 / 7)
@@ -35,10 +35,10 @@ vars:
   use_snowplow_web_user_mapping_table: false # true if using the Snowplow base model for web user mappings (domain_userid => user_id)
 
 # Source variable examples:
-  # snowplow__atomic_schema: 'atomic_sample'
-  # snowplow__events_table: 'sample_events'
-  # snowplow__page_views_schema: 'derived_dev'
-  # snowplow__page_views_table: 'page_views'
+  # snowflake__atomic_schema: 'atomic'
+  # snowflake__events_table: 'events'
+  # snowflake__page_views_schema: 'derived'
+  # snowflake__page_views_table: 'page_views'
   
 
   
