@@ -8,14 +8,14 @@ SELECT
         ELSE 'f' || events.domain_userid
     END AS customerId, -- f (anonymous) or u (identifier) prefixed user identifier
     derived_tstamp AS visitStartTimestamp, -- we consider the event timestamp to be the session start, rather than the session start timestamp
-    {{ channel_classification_snowflake() }} AS channel,
+    {{ channel_classification() }} AS channel,
     -- TODO: consider a channels column?
     refr_urlpath AS referralPath,
     mkt_campaign AS campaign,
     mkt_source AS source,
     mkt_medium AS medium
 FROM
-    {{ source('atomic', 'fractribution_sample') }} events
+    {{ source('atomic', 'events') }} events
     {% if var('use_snowplow_web_user_mapping_table') %}
         LEFT JOIN
         {{ var('snowplow_web_user_mapping_table') }} AS user_mapping
