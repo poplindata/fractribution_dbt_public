@@ -53,7 +53,7 @@ models:
       - name: direct_display_other_organic_search_paid_search_referral
         description: These columns may be created dynamically... 
 
-  - name: s_paths_to_conversion
+  - name: paths_to_conversion
     description: TBA
     columns:
       - name: customerId
@@ -67,7 +67,7 @@ models:
       - name: transformedPath
         description: Transformations applied to "path" above
 
-  - name: s_paths_to_non_conversion
+  - name: paths_to_non_conversion
     description: TBA
     columns:
       - name: customerId

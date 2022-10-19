@@ -2,13 +2,13 @@
 
 WITH Conversions AS (
   SELECT DISTINCT customerId
-  FROM {{ ref('s_conversions_by_customer_id') }}
+  FROM {{ ref('conversions_by_customer_id') }}
 ),
 NonConversions AS (
   SELECT
     customerId,
     MAX(visitStartTimestamp) AS nonConversionTimestamp
-  FROM {{ ref('s_sessions_by_customer_id') }} sessions_by_customer_id
+  FROM {{ ref('sessions_by_customer_id') }} sessions_by_customer_id
   LEFT JOIN Conversions
     USING (customerId)
   WHERE Conversions.customerId IS NULL

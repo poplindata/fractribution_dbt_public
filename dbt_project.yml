@@ -43,7 +43,7 @@ vars:
   
   # snowplow_web_user_mapping_table: fractribution_snowplow_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
 
-
+on-run-start: "{{ create_udfs() }}"
 models:
   fractribution_snowplow:
     +materialized: table
