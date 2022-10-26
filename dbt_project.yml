@@ -1,11 +1,10 @@
 
-name: 'fractribution_snowplow'
+name: 'fractribution'
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-# profile: 'fractribution_snowplow' # bigquery profile
-profile: 'fractribution_snowflake' # snowflake profile
+profile: 'fractribution'
 
 
 # These configurations specify where dbt should look for different types of files.
@@ -34,16 +33,18 @@ vars:
 
   use_snowplow_web_user_mapping_table: false # true if using the Snowplow base model for web user mappings (domain_userid => user_id)
 
-# Source variables examples:
-  # snowflake__atomic_schema: 'atomic'
-  # snowflake__events_table: 'events'
-  # snowflake__page_views_schema: 'atomic_derived'
-  # snowflake__page_views_table: 'snowplow_web_page_views'
+# Set source table vars if not using defaults:
+  # atomic_schema: 'atomic_test'
+  # events_table: 'fractribution_sample'
+  # page_views_schema: 'atomic_derived'
+  # page_views_table: 'snowplow_web_page_views_frac'
   
   
-  # snowplow_web_user_mapping_table: fractribution_snowplow_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
+  # snowplow_web_user_mapping_table: fractribution_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
+
 
 on-run-start: "{{ create_udfs() }}"
 models:
-  fractribution_snowplow:
+  fractribution:
+    +schema: "fractribution"
     +materialized: table

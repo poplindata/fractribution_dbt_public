@@ -1,5 +1,5 @@
 {% macro create_udfs() %}
-  {{ return(adapter.dispatch('create_udfs', 'fractribution_snowplow')()) }}
+  {{ return(adapter.dispatch('create_udfs', 'fractribution')()) }}
 {% endmacro %}
 
 

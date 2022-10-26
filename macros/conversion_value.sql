@@ -4,7 +4,7 @@
 -- com_acme_checkout_1[SAFE_OFFSET(0)].cart_value
 -- do not alias this value
 {% macro conversion_value() %}
-    {{ return(adapter.dispatch('conversion_value', 'fractribution_snowplow')()) }}
+    {{ return(adapter.dispatch('conversion_value', 'fractribution')()) }}
 {% endmacro %}
 
 {% macro default__conversion_value() %}

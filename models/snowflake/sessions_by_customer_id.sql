@@ -29,10 +29,10 @@ WHERE
     AND
     -- restrict to certain hostnames
     page_urlhost IN (
-        {% for urlhost in var('conversion_hosts') %}
+        {%- for urlhost in var('conversion_hosts') %}
             '{{ urlhost }}'
-            {% if not loop.last %},{% endif %}
-        {% endfor %}
+            {%- if not loop.last %},{% endif %}
+        {%- endfor %}
     )
 
     {% if var('consider_intrasession_channels') %}

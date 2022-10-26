@@ -3,19 +3,19 @@ version: 2
 
 sources:
   - name: atomic
-    schema: "{{ var('snowflake__atomic_schema', 'atomic') }}"
+    schema: "{{ var('atomic_schema', 'atomic') }}"
     tables:
       - name: events
-        identifier: "{{ var('snowflake__events_table', 'events') }}"
+        identifier: "{{ var('events_table', 'events') }}"
   - name: derived
-    schema: "{{ var('snowflake__page_views_schema', 'derived') }}"
+    schema: "{{ var('page_views_schema', 'derived') }}"
     tables:
       - name: snowplow_web_page_views
-        identifier: "{{ var('snowflake__page_views_table', 'snowplow_web_page_views') }}"
+        identifier: "{{ var('page_views_table', 'snowplow_web_page_views') }}"
         
 models:
   - name: channel_counts
-    description: TBA
+    description: Number of conversion events per channel, campaign, source and medium
     columns:
       - name: channel
         description: Channel name
@@ -29,10 +29,10 @@ models:
         description: Count of events per channel / campaign / source / medium
 
   - name: conversions_by_customer_id
-    description: TBA
+    description: Each conversion and associated revenue per customer_id
     columns:
       - name: customerId
-        description: Identifier for the customer, 'f' prefixed for, 'u' prefixed for logged in?
+        description: Identifier for the customer, 'f' prefixed when domain_userid is used, 'u' prefixed for when user_id is used (logged in?)
       - name: conversionTimestamp
         description: UTC timestamp for the conversion
       - name: revenue
@@ -40,7 +40,7 @@ models:
       
 
   - name: path_summary
-    description: TBA
+    description: For each unique path, a summary of associated conversions, non conversions and revenue
     columns:
       - name: transformedPath
         description: "> delimited path summary"
@@ -54,7 +54,7 @@ models:
         description: These columns may be created dynamically... 
 
   - name: paths_to_conversion
-    description: TBA
+    description: Customer id and the the paths the customer has followed that have lead to conversion
     columns:
       - name: customerId
         description: Id for the customer (identified or cookie)
@@ -68,7 +68,7 @@ models:
         description: Transformations applied to "path" above
 
   - name: paths_to_non_conversion
-    description: TBA
+    description: Customer id and the the paths the customer has followed that have not lead to conversion
     columns:
       - name: customerId
         description: Id for the customer (identified or cookie)
@@ -78,7 +78,8 @@ models:
         description: Transformations applied to "path" above
 
   - name: sessions_by_customer_id
-    description: TBA
+    description: >
+      Channels per session by customer id, yields one row per session unless consider_intrasession_channels is true
     columns:
       - name: customerId
         description: Customer id
