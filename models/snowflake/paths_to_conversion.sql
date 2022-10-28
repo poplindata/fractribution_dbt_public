@@ -15,8 +15,8 @@ SELECT
       {% if arg_str %}, {{arg_str}}{% endif %})
     {% endfor %}
     , ' > ') AS transformedPath
-FROM {{ ref('s_conversions_by_customer_id') }} conversions_by_customer_id
-LEFT JOIN {{ ref('s_sessions_by_customer_id') }} sessions_by_customer_id
+FROM {{ ref('conversions_by_customer_id') }} conversions_by_customer_id
+LEFT JOIN {{ ref('sessions_by_customer_id') }} sessions_by_customer_id
   ON
     conversions_by_customer_id.customerId = sessions_by_customer_id.customerId
     AND DATEDIFF(day, visitStartTimestamp, conversionTimestamp)

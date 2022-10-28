@@ -1,11 +1,10 @@
 
-name: 'fractribution_snowplow'
+name: 'fractribution'
 version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-# profile: 'fractribution_snowplow' # bigquery profile
-profile: 'fractribution_snowflake' # snowflake profile
+profile: 'fractribution'
 
 
 # These configurations specify where dbt should look for different types of files.
@@ -33,12 +32,19 @@ vars:
   consider_intrasession_channels: false # false = only considers the channel at the start (first page view) of the session, true = consider multiple channels in the conversion session as well as historical channels
 
   use_snowplow_web_user_mapping_table: false # true if using the Snowplow base model for web user mappings (domain_userid => user_id)
-  # snowplow_web_user_mapping_table: fractribution_snowplow_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
+
+# Set source table vars if not using defaults:
+  # atomic_schema: 'atomic_test'
+  # events_table: 'fractribution_sample'
+  # page_views_schema: 'atomic_derived'
+  # page_views_table: 'snowplow_web_page_views_frac'
+  
+  
+  # snowplow_web_user_mapping_table: fractribution_derived.snowplow_web_user_mapping # path (schema and table) in to the Snowplow web user mapping table (BigQuery)
 
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
+on-run-start: "{{ create_udfs() }}"
 models:
-  fractribution_snowplow:
+  fractribution:
+    +schema: "fractribution"
     +materialized: table
