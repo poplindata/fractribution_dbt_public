@@ -3,12 +3,12 @@ SELECT
   conversions_by_customer_id.customerId,
   conversionTimestamp,
   revenue,
-  ARRAY_TO_STRING(TrimLongPath(
+  ARRAY_TO_STRING({{schema}}.TrimLongPath(
     ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp), {{ var('path_lookback_steps') }}),
     ' > ') AS path,
   ARRAY_TO_STRING(
     {% for path_transform_name, _ in var('path_transforms')|reverse %}
-      {{path_transform_name}}(
+      {{schema}}.{{path_transform_name}}(
     {% endfor %}
         ARRAY_AGG(channel) WITHIN GROUP (ORDER BY visitStartTimestamp)
     {% for _, arg_str in var('path_transforms') %}
