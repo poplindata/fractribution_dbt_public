@@ -8,13 +8,9 @@
 
 ### Running
 
-1. Create the required UDFs by running the create UDFs macro - `dbt run-operation create_udfs`. This only needs to be run once as this creates permanent UDFs.
-2. Ensure the setup steps have been completed above.
-3. Run `dbt run`
+1. Ensure the setup steps have been completed above.
+2. Run `dbt run`
 
-### TODO
-
-- Refactor Python code so it doesn't mutate a table and instead creates a brand new table
 
 ### Differences to Fractribution
 

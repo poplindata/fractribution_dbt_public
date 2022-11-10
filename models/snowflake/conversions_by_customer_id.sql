@@ -15,7 +15,6 @@ FROM
         {{ var('snowplow_web_user_mapping_table') }} AS user_mapping
         ON
         events.domain_userid = user_mapping.domain_userid
-        -- TODO: this needs to be tested...
     {% endif %}
 WHERE
     {{ conversion_clause() }}

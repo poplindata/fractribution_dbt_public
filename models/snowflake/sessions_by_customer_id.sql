@@ -8,7 +8,6 @@ SELECT
     END AS customerId, -- f (anonymous) or u (identifier) prefixed user identifier
     derived_tstamp AS visitStartTimestamp, -- we consider the event timestamp to be the session start, rather than the session start timestamp
     {{ channel_classification() }} AS channel,
-    -- TODO: consider a channels column?
     refr_urlpath AS referralPath,
     mkt_campaign AS campaign,
     mkt_source AS source,
@@ -20,7 +19,6 @@ FROM
         {{ var('snowplow_web_user_mapping_table') }} AS user_mapping
         ON
         page_views.domain_userid = user_mapping.domain_userid
-        -- TODO: this needs to be tested...
     {% endif %}
 WHERE
     DATE(derived_tstamp) >= DATEADD(d, -{{ var('path_lookback_days') + 1 }}, '{{ var('conversion_window_start_date') }}')

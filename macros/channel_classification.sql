@@ -4,8 +4,7 @@
 
 {% macro snowflake__channel_classification() %}
     -- macro to perform channel classifications
-    -- each channel should return a name
-    -- that will also be a valid Snowflake column name
+    -- each channel should return a name that will also be a valid Snowflake column name
     -- by convention use underscores to separate
     -- (<251 characters, avoid spaces, leading numbers)
 
